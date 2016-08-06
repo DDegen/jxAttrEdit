@@ -186,15 +186,15 @@ class article_jxattredit extends oxAdminView
             
             $sSql = "";
             
-            if (($sValueID != '') && ($sAttrValue != '')) {   //attribute exists and not empty value received --> update
+            if (($sValueID != '') && ($sAttrValue != "''")) {   //attribute exists and not empty value received --> update
                 $sSql = "UPDATE $sOxvObject2Attribute SET oxvalue=$sAttrValue WHERE oxid='$sValueID' ";
             }
             
-            if (($sValueID != '') && ($sAttrValue == '')) {   //attribute exists, but empty value --> delete from DB
+            if (($sValueID != '') && ($sAttrValue == "''")) {   //attribute exists, but empty value --> delete from DB
                 $sSql = "DELETE FROM oxobject2attribute WHERE oxid='$sValueID' ";
             }
             
-            if (($sValueID == '') && ($sAttrValue != '')) {   //attribute doesn't exists, value received --> insert new value
+            if (($sValueID == '') && ($sAttrValue != "''")) {   //attribute doesn't exists, value received --> insert new value
                 $sNewUid = oxUtilsObject::getInstance()->generateUID();
                 $sSql = "INSERT INTO $sOxvObject2Attribute (OXID, OXOBJECTID, OXATTRID, OXVALUE, OXPOS) VALUES ('$sNewUid', '$sOXID', '$sAttrID', $sAttrValue, 0)";
             }
